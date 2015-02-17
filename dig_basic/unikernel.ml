@@ -1,6 +1,5 @@
 open Lwt
 open V1_LWT
-open Printf
 
 let domain = "google.com"
 let server = Ipaddr.V4.make 8 8 8 8
