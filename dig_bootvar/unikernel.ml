@@ -1,9 +1,6 @@
 open Lwt
 open V1_LWT
 
-let domain = "google.com"
-let server = Ipaddr.V4.make 8 8 8 8
-
 module Client (C:CONSOLE) (S:STACKV4) = struct
 
   module U = S.UDPV4
