@@ -19,7 +19,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
     DNS.resolve (module Dns.Protocol.Client) t server 53 Q_ANY_CLS Q_A [domain]
-    >>| fun r ->
+    >>= fun r ->
     List.fold_left r.answers ~f:(fun a x ->
       match x.rdata with
       | A ip -> (Ipaddr.V4 ip) :: a
