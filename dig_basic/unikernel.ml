@@ -3,7 +3,7 @@ open V1_LWT
 open Printf
 
 let domain = "google.com"
-let server = Ipaddr.make 8 8 8 8
+let server = Ipaddr.V4.make 8 8 8 8
 
 module Client (C:CONSOLE) (S:STACKV4) = struct
 
