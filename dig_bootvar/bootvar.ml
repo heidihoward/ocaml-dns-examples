@@ -25,7 +25,7 @@ open Lwt
 type t = (string * string) list
 
 let create () = 
-  Lwt.OS.Xs.make () >>= fun client ->
+  V1_LWT.OS.Xs.make () >>= fun client ->
   OS.Xs.(immediate client (fun x -> read x "vm")) >>= fun vm ->
   OS.Xs.(immediate client (fun x -> read x (vm^"/image/cmdline"))) >>= fun cmd_line ->
   let entries = Re_str.(split (regexp_string " ") cmd_line) in
