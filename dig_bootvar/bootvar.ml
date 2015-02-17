@@ -29,10 +29,11 @@ let create () =
   OS.Xs.(immediate client (fun x -> read x "vm")) >>= fun vm ->
   OS.Xs.(immediate client (fun x -> read x (vm^"/image/cmdline"))) >>= fun cmd_line ->
   let entries = Re_str.(split (regexp_string " ") cmd_line) in
-  List.map (fun x ->
+  return 
+  (List.map (fun x ->
         match Re_str.(split (regexp_string "=") x) with 
         | [a;b] -> (a,b)
-        | _ -> raise (Failure "malformed boot parameters")) entries
+        | _ -> raise (Failure "malformed boot parameters")) entries)
 
 
 (* get boot parameter *)
