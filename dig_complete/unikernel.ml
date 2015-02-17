@@ -18,7 +18,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun () ->
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
-    DNS.resolve (module Dns.Protocol.Client) t server 53 Q_IN Q_A [domain]
+    DNS.resolve (module Dns.Protocol.Client) t server 53 Q_IN Q_A (string_to_domain domain)
     >>= fun r ->
     let ips =
     List.fold_left (fun a x ->
