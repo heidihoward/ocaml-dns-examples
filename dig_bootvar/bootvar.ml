@@ -19,6 +19,7 @@
 open V1_LWT
 open String
 open Re
+open Lwt
 
 (* Based on mirage-skeleton/xen/static_website+ip code for reading boot parameters *)
 type t = (string * string) list
