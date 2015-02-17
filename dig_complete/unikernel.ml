@@ -15,7 +15,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun () ->
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
-    DNS.gethostbyname t ~server domain
+    DNS.resolve (DNS.create ()) t server 53 Dns.Packet.(Q_ANY_CLS) Dns.Packet.(Q_A) Dns.Name(domain)
     >>= fun rl ->
     Lwt_list.iter_s
       (fun r ->
