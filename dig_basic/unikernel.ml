@@ -14,16 +14,13 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     let t = DNS.create s in
     C.log_s c "Started, will begin resolving shortly..." >>= fun () ->
     OS.Time.sleep 2.0 >>= fun () ->
-    while_lwt true do
       C.log_s c ("Resolving " ^ domain)
       >>= fun () ->
       DNS.gethostbyname t ~server "google.com"
       >>= fun rl ->
       Lwt_list.iter_s
         (fun r ->
-           C.log_s c ("  => " ^ (Ipaddr.to_string r))
+           C.log_s c ("Answer " ^ (Ipaddr.to_string r))
         ) rl
-      >>= fun () ->
-      OS.Time.sleep 1.0
-    done
+
 end
