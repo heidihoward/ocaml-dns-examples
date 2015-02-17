@@ -11,8 +11,8 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
 
   let start c s =
     let bootvar = Bootvar.create () in
-    let domain = Bootvar.get bootvar "domain" in
-    let server = Ipaddr.V4.of_string_exn (Bootvar.get bootvar "server") in
+    let domain = Bootvar.get_exn bootvar "domain" in
+    let server = Ipaddr.V4.of_string_exn (Bootvar.get_exn bootvar "server") in
     let t = DNS.create s in
     OS.Time.sleep 2.0 
     >>= fun () ->
