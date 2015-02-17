@@ -6,6 +6,9 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
   module U = S.UDPV4
   module DNS = Dns_resolver_mirage.Make(OS.Time)(S)
 
+  open Dns.Packet
+  open Dns.Name
+
   let start c s =
     Bootvar.create () >>= fun bootvar ->
     let domain = Bootvar.get_exn bootvar "domain" in
@@ -15,7 +18,12 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun () ->
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
-    DNS.resolve Dns.Protocol.Client t server 53 Dns.Packet.(Q_ANY_CLS) Dns.Packet.(Q_A) Dns.Name(domain)
+    DNS.resolve (module Dns.Protocol.Client) t server 53 Q_ANY_CLS Q_A [domain]
+    >>| fun r ->
+    List.fold_left r.answers ~f:(fun a x ->
+      match x.rdata with
+      | A ip -> (Ipaddr.V4 ip) :: a
+      | _ -> a ) ~init:[] 
     >>= fun rl ->
     Lwt_list.iter_s
       (fun r ->
