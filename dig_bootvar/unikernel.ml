@@ -10,7 +10,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
   module DNS = Dns_resolver_mirage.Make(OS.Time)(S)
 
   let start c s =
-    let bootvar = Bootvar.create () in
+    Bootvar.create () >>= fun bootvar ->
     let domain = Bootvar.get_exn bootvar "domain" in
     let server = Ipaddr.V4.of_string_exn (Bootvar.get_exn bootvar "server") in
     let t = DNS.create s in
