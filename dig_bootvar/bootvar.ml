@@ -24,7 +24,9 @@ open Re
 type t = (string * string) list
 
 let create () = 
-  let cmd_line = OS.Start_info.((get ()).cmd_line) in
+  OS.Xs.make () >>= fun client ->
+  OS.Xs.(immediate client (fun x -> read x "vm")) >>= fun vm ->
+  OS.Xs.(immediate client (fun x -> read x (vm^"/image/cmdline"))) >>= fun cmd_line ->
   let entries = Re_str.(split (regexp_string " ") cmd_line) in
   List.map (fun x ->
         match Re_str.(split (regexp_string "=") x) with 
