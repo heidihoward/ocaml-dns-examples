@@ -20,7 +20,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun rl ->
     Lwt_list.iter_s
       (fun r ->
-         C.log_s c ("Answer" ^ (Ipaddr.to_string r))
+         C.log_s c ("Answer " ^ (Ipaddr.to_string r))
       ) rl
 
 end
