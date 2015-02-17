@@ -19,15 +19,15 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
     DNS.resolve (module Dns.Protocol.Client) t server 53 Q_ANY_CLS Q_A [domain]
-    >>= fun r ->
+    >>= 
+    let ips =
     List.fold_left (fun a x ->
       match x.rdata with
       | A ip -> (Ipaddr.V4 ip) :: a
-      | _ -> a ) [] r.answers
-    >>= fun rl ->
+      | _ -> a ) [] r.answers in
     Lwt_list.iter_s
       (fun r ->
          C.log_s c ("Answer " ^ (Ipaddr.to_string r))
-      ) rl
+      ) ips
 
 end
