@@ -20,10 +20,10 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun () ->
     DNS.resolve (module Dns.Protocol.Client) t server 53 Q_ANY_CLS Q_A [domain]
     >>= fun r ->
-    List.fold_left r.answers ~f:(fun a x ->
+    List.fold_left (fun a x ->
       match x.rdata with
       | A ip -> (Ipaddr.V4 ip) :: a
-      | _ -> a ) ~init:[] 
+      | _ -> a ) [] r.answers
     >>= fun rl ->
     Lwt_list.iter_s
       (fun r ->
