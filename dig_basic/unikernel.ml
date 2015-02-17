@@ -15,7 +15,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
     >>= fun () ->
     C.log_s c ("Resolving " ^ domain)
     >>= fun () ->
-    DNS.gethostbyname t ~server "google.com"
+    DNS.gethostbyname t ~server domain
     >>= fun rl ->
     Lwt_list.iter_s
       (fun r ->
