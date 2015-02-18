@@ -29,5 +29,7 @@ module Client (C:CONSOLE) (S:STACKV4) = struct
       (fun r ->
          C.log_s c ("Answer " ^ (Ipaddr.to_string r))
       ) ips
+    >>= fun () ->
+        C.log_s c (to_string r)
 
 end
