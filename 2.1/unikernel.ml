@@ -4,7 +4,7 @@ open Printf
 open Dns
 open Dns_server
 
-let listening_port = 5354
+let listening_port = 53
 
 
 module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
