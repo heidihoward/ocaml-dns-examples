@@ -13,4 +13,4 @@ let client =
 
 let () =
   add_to_ocamlfind_libraries [ "dns.mirage"; ];
-  register "dns-client" [ client $ default_console $  data $ direct_stackv4_with_static_ipv4 default_console tap0 ip_config]
+  register "dns-client" [ client $ default_console $ data $ direct_stackv4_with_static_ipv4 default_console tap0 ip_config]
