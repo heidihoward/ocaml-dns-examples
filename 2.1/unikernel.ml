@@ -4,8 +4,8 @@ open Printf
 open Dns
 open Dns_server
 
-let listening_port = 53
-
+let port = 53
+let zonefile = "test.zone"
 
 module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
 
@@ -14,7 +14,5 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
 
   let start c k s =
     let t = DNS.create s k in
-    DNS.get_zonebuf t "test.zone"
-    >>= (fun zonebuf ->
-    DNS.serve_with_zonebuf t ~port:listening_port ~zonebuf)
+    DNS.serve_with_zonefile t ~port ~zonefile
 end
