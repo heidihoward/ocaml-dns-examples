@@ -13,7 +13,7 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
 
   let start c k s =
     let t = DNS.create s k in
-    (DNS.get_zonebuff "test.zone"
-    >>= fun zonebuf ->
-    DNS.serve_with_zonebuf ~port:listening_port ~zonebuf
+    DNS.get_zonebuff "test.zone"
+    >>= (fun zonebuf ->
+    DNS.serve_with_zonebuf ~port:listening_port ~zonebuf)
 end
