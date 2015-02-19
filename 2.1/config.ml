@@ -16,6 +16,6 @@ let direct =
   handler $ default_console $ data $ stack
 
 let () =
-  add_to_ocamlfind_libraries ["dns.lwt-core"];
+  add_to_ocamlfind_libraries ["dns.mirage";"dns.lwt-core"];
   add_to_opam_packages ["dns"];
   register "dns" [direct]
