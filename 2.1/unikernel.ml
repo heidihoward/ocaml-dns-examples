@@ -1,35 +1,44 @@
 open Lwt
 open V1_LWT
+open Printf
+open Dns_server
 
-module Client (C:CONSOLE) (S:STACKV4) = struct
+let listening_port = 5354
 
-  module U = S.UDPV4
-  module DNS = Dns_resolver_mirage.Make(OS.Time)(S)
 
-  open Dns.Packet
-  open Dns.Name
+module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
 
-  let start c s =
-    Bootvar.create () >>= fun bootvar ->
-    let domain = Bootvar.get_exn bootvar "domain" in
-    let server = Ipaddr.V4.of_string_exn (Bootvar.get_exn bootvar "server") in
-    let t = DNS.create s in
-    OS.Time.sleep 2.0 
-    >>= fun () ->
-    C.log_s c ("Resolving " ^ domain)
-    >>= fun () ->
-    DNS.resolve (module Dns.Protocol.Client) t server 53 Q_IN Q_A (string_to_domain_name domain)
-    >>= fun r ->
-    let ips =
-    List.fold_left (fun a x ->
-      match x.rdata with
-      | A ip -> (Ipaddr.V4 ip) :: a
-      | _ -> a ) [] r.answers in
-    Lwt_list.iter_s
-      (fun r ->
-         C.log_s c ("Answer " ^ (Ipaddr.to_string r))
-      ) ips
-    >>= fun () ->
-        C.log_s c (to_string r)
+ module U = S.UDPV4
 
+  let listener ~processor = 
+    fun ~src ~dst ~src_port buf ->
+          C.log_s c "got udp"
+          >>= fun () ->
+          let ba = Cstruct.to_bigarray buf in
+          let src' = (Ipaddr.V4 dst), listening_port in
+          let dst' = (Ipaddr.V4 src), src_port in
+          let obuf = (Io_page.get 1 :> Dns.Buf.t) in
+          process_query ba (Dns.Buf.length ba) obuf src' dst' processor
+          >>= function
+          | None ->
+            C.log_s c "No response"
+          | Some rba ->
+            let rbuf = Cstruct.of_bigarray rba in
+            U.write ~source_port:listening_port ~dest_ip:src ~dest_port:src_port udp rbuf
+
+  let start c k s =
+    lwt zonebuf = 
+      K.size k "test.zone"
+      >>= function
+      | `Error _ -> fail (Failure "test.zone not found")
+      | `Ok sz ->
+        K.read k "test.zone" 0 (Int64.to_int sz) 
+        >>= function 
+        | `Error _ -> fail (Failure "test.zone error reading")
+        | `Ok pages -> return (String.concat "" (List.map Cstruct.to_string pages))
+    in
+    let process = process_of_zonebuf zonebuf in
+    let processor = (processor_of_process process :> (module PROCESSOR)) in
+    S.listen_udpv4 s listening_port (listener ~processor);
+    S.listen s
 end
