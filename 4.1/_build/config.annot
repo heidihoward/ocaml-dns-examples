@@ -1,0 +1,346 @@
+"config.ml" 3 13 17 "config.ml" 3 13 26
+type(
+  Mirage.ipv4_config
+)
+ident(
+  def ip_config "config.ml" 9 168 168 "config.ml" 1 0 -1
+)
+"config.ml" 4 43 54 "config.ml" 4 43 68
+type(
+  int -> int -> int -> int -> Ipaddr.V4.t
+)
+ident(
+  ext_ref Ipaddr.V4.make
+)
+"config.ml" 4 43 69 "config.ml" 4 43 72
+type(
+  int
+)
+"config.ml" 4 43 73 "config.ml" 4 43 76
+type(
+  int
+)
+"config.ml" 4 43 77 "config.ml" 4 43 78
+type(
+  int
+)
+"config.ml" 4 43 79 "config.ml" 4 43 80
+type(
+  int
+)
+"config.ml" 4 43 54 "config.ml" 4 43 80
+call(
+  stack
+)
+type(
+  Ipaddr.V4.t
+)
+"config.ml" 5 82 93 "config.ml" 5 82 107
+type(
+  int -> int -> int -> int -> Ipaddr.V4.t
+)
+ident(
+  ext_ref Ipaddr.V4.make
+)
+"config.ml" 5 82 108 "config.ml" 5 82 111
+type(
+  int
+)
+"config.ml" 5 82 112 "config.ml" 5 82 115
+type(
+  int
+)
+"config.ml" 5 82 116 "config.ml" 5 82 119
+type(
+  int
+)
+"config.ml" 5 82 120 "config.ml" 5 82 121
+type(
+  int
+)
+"config.ml" 5 82 93 "config.ml" 5 82 121
+call(
+  stack
+)
+type(
+  Ipaddr.V4.t
+)
+"config.ml" 6 123 136 "config.ml" 6 123 150
+type(
+  int -> int -> int -> int -> Ipaddr.V4.t
+)
+ident(
+  ext_ref Ipaddr.V4.make
+)
+"config.ml" 6 123 151 "config.ml" 6 123 154
+type(
+  int
+)
+"config.ml" 6 123 155 "config.ml" 6 123 158
+type(
+  int
+)
+"config.ml" 6 123 159 "config.ml" 6 123 160
+type(
+  int
+)
+"config.ml" 6 123 161 "config.ml" 6 123 162
+type(
+  int
+)
+"config.ml" 6 123 136 "config.ml" 6 123 162
+call(
+  stack
+)
+type(
+  Ipaddr.V4.t
+)
+"config.ml" 6 123 135 "config.ml" 6 123 163
+type(
+  Ipaddr.V4.t list
+)
+"config.ml" 3 13 41 "config.ml" 7 165 166
+type(
+  Mirage.ipv4_config
+)
+type(
+  Mirage.ipv4_config
+)
+"config.ml" 9 168 172 "config.ml" 9 168 178
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+ident(
+  def client "config.ml" 12 242 242 "config.ml" 1 0 -1
+)
+"config.ml" 10 181 183 "config.ml" 10 181 190
+type(
+  string ->
+  ?libraries:string list ->
+  ?packages:string list ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+ident(
+  ext_ref Mirage.foreign
+)
+"config.ml" 10 181 191 "config.ml" 10 181 209
+type(
+  string
+)
+"config.ml" 10 181 183 "config.ml" 10 181 209
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+type(
+  ?libraries:string list ->
+  ?packages:string list ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+"config.ml" 10 181 210 "config.ml" 10 181 212
+type(
+  ((Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+   (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl) ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+ident(
+  ext_ref Pervasives.( @@ )
+)
+"config.ml" 10 181 213 "config.ml" 10 181 220
+type(
+  Mirage.console Mirage.typ
+)
+ident(
+  ext_ref Mirage.console
+)
+"config.ml" 10 181 221 "config.ml" 10 181 224
+type(
+  Mirage.console Mirage.typ ->
+  (Mirage.stackv4 -> Mirage.job) Mirage.typ ->
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ
+)
+ident(
+  ext_ref Mirage.( @-> )
+)
+"config.ml" 10 181 225 "config.ml" 10 181 232
+type(
+  Mirage.stackv4 Mirage.typ
+)
+ident(
+  ext_ref Mirage.stackv4
+)
+"config.ml" 10 181 233 "config.ml" 10 181 236
+type(
+  Mirage.stackv4 Mirage.typ ->
+  Mirage.job Mirage.typ -> (Mirage.stackv4 -> Mirage.job) Mirage.typ
+)
+ident(
+  ext_ref Mirage.( @-> )
+)
+"config.ml" 10 181 237 "config.ml" 10 181 240
+type(
+  Mirage.job Mirage.typ
+)
+ident(
+  ext_ref Mirage.job
+)
+"config.ml" 10 181 225 "config.ml" 10 181 240
+call(
+  stack
+)
+type(
+  (Mirage.stackv4 -> Mirage.job) Mirage.typ
+)
+"config.ml" 10 181 213 "config.ml" 10 181 240
+call(
+  stack
+)
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.typ
+)
+"config.ml" 10 181 183 "config.ml" 10 181 240
+call(
+  stack
+)
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+"config.ml" 12 242 246 "config.ml" 12 242 248
+type(
+  unit
+)
+"config.ml" 13 251 253 "config.ml" 13 251 279
+type(
+  string list -> unit
+)
+ident(
+  ext_ref Mirage.add_to_ocamlfind_libraries
+)
+"config.ml" 13 251 282 "config.ml" 13 251 294
+type(
+  string
+)
+"config.ml" 13 251 280 "config.ml" 13 251 297
+type(
+  string list
+)
+"config.ml" 13 251 253 "config.ml" 13 251 297
+call(
+  stack
+)
+type(
+  unit
+)
+"config.ml" 14 299 301 "config.ml" 14 299 309
+type(
+  ?tracing:Mirage.tracing -> string -> Mirage.job Mirage.impl list -> unit
+)
+ident(
+  ext_ref Mirage.register
+)
+"config.ml" 14 299 310 "config.ml" 14 299 322
+type(
+  string
+)
+"config.ml" 14 299 325 "config.ml" 14 299 331
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+ident(
+  int_ref client "config.ml" 9 168 172 "config.ml" 9 168 178
+)
+"config.ml" 14 299 332 "config.ml" 14 299 333
+type(
+  (Mirage.console -> Mirage.stackv4 -> Mirage.job) Mirage.impl ->
+  Mirage.console Mirage.impl -> (Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+ident(
+  ext_ref Mirage.( $ )
+)
+"config.ml" 14 299 334 "config.ml" 14 299 349
+type(
+  Mirage.console Mirage.impl
+)
+ident(
+  ext_ref Mirage.default_console
+)
+"config.ml" 14 299 325 "config.ml" 14 299 349
+call(
+  stack
+)
+type(
+  (Mirage.stackv4 -> Mirage.job) Mirage.impl
+)
+"config.ml" 14 299 350 "config.ml" 14 299 351
+type(
+  (Mirage.stackv4 -> Mirage.job) Mirage.impl ->
+  Mirage.stackv4 Mirage.impl -> Mirage.job Mirage.impl
+)
+ident(
+  ext_ref Mirage.( $ )
+)
+"config.ml" 14 299 352 "config.ml" 14 299 383
+type(
+  ?clock:Mirage.clock Mirage.impl ->
+  ?random:Mirage.random Mirage.impl ->
+  ?time:Mirage.time Mirage.impl ->
+  Mirage.console Mirage.impl ->
+  Mirage.network Mirage.impl ->
+  Mirage.ipv4_config -> Mirage.stackv4 Mirage.impl
+)
+ident(
+  ext_ref Mirage.direct_stackv4_with_static_ipv4
+)
+"config.ml" 14 299 384 "config.ml" 14 299 399
+type(
+  Mirage.console Mirage.impl
+)
+ident(
+  ext_ref Mirage.default_console
+)
+"config.ml" 14 299 400 "config.ml" 14 299 404
+type(
+  Mirage.network Mirage.impl
+)
+ident(
+  ext_ref Mirage.tap0
+)
+"config.ml" 14 299 405 "config.ml" 14 299 414
+type(
+  Mirage.ipv4_config
+)
+ident(
+  int_ref ip_config "config.ml" 3 13 17 "config.ml" 3 13 26
+)
+"config.ml" 14 299 352 "config.ml" 14 299 414
+call(
+  stack
+)
+type(
+  Mirage.stackv4 Mirage.impl
+)
+"config.ml" 14 299 325 "config.ml" 14 299 414
+call(
+  stack
+)
+type(
+  Mirage.job Mirage.impl
+)
+"config.ml" 14 299 323 "config.ml" 14 299 415
+type(
+  Mirage.job Mirage.impl list
+)
+"config.ml" 14 299 301 "config.ml" 14 299 415
+call(
+  stack
+)
+type(
+  unit
+)
+"config.ml" 13 251 253 "config.ml" 14 299 415
+type(
+  unit
+)

@@ -1,0 +1,14 @@
+; <<>> DiG 9.2.5 <<>> phlegethon.org axfr +vc @bright.asuk.net
+; (1 server found)
+;; global options:  printcmd
+$ORIGIN d1.signpo.st.
+$TTL 604800 
+
+;; SOA, including parentheses and comments and an embedded dot
+d1.signpo.st.		604800	IN	 SOA   ( 
+	ns0.d1.signpo.st. john\.doe.d1.signpo.st. 1136975101 ; hello!
+	3600 1800 3024000 1800  
+)
+
+;; Various ways of expressing RRs
+d1.signpo.st.		604800	IN	MX	10 mail.d1.signpo.st.
