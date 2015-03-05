@@ -1,6 +1,5 @@
 open Lwt
 open V1_LWT
-open Printf
 open Dns
 open Dns_server
 
