@@ -1,0 +1,15 @@
+_build
+.*.swp
+.merlin
+*.xe
+*.xml
+backend.ml
+main.ml
+myocamlbuild.ml
+**/Makefile
+*.native
+*.cfg
+*.xen
+*.map
+*.img
+*.xl
