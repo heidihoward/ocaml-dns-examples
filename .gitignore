@@ -13,3 +13,8 @@ myocamlbuild.ml
 *.map
 *.img
 *.xl
+*/log
+
+*/mir-dns
+*/static1.ml
+*/static1.mli

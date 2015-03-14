@@ -1,4 +1,0 @@
-ocamlfind ocamldep -package mirage -modules config.ml > config.ml.depends
-ocamlfind ocamlc -c -annot -bin-annot -package mirage -o config.cmo config.ml
-ocamlfind ocamlopt -c -annot -bin-annot -package mirage -o config.cmx config.ml
-ocamlfind ocamlopt -shared -package mirage config.cmx -o config.cmxs
