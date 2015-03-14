@@ -1,4 +1,4 @@
-# ocaml-dns-examples
+### simple examples using ocaml-dns
 
 This is the demo code for a step-by-step guide to setting up your own DNS resolver using MirageOS on Xen/ARM (though the code should work for Xen/x86 and Unix backends too). The tutorial is online:
 
