@@ -4,7 +4,6 @@ open Dns
 open Dns_server
 
 let port = 53
-let zonefile = "test.zone"
 let resolver_addr = Ipaddr.V4.make 8 8 8 8
 let resolver_port = 53
 
@@ -19,7 +18,7 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
       C.log_s c (to_string packet) 
       >>= fun () ->
       match packet.questions with
-      | [] -> return None (* no questions in packet *)
+      | [] -> return None (* we are not supporting QDCOUNT = 0  *)
       | [q] -> 
             DR.resolve (module Dns.Protocol.Client) resolver resolver_addr resolver_port q.q_class q.q_type q.q_name 
             >>= fun result ->
