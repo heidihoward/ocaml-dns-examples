@@ -23,23 +23,11 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
         return (Some (Dns.Query.answer_of_response result))
     | _ -> (* QDCOUNT != 1 *) return None
 
-  (* try process, if no answer then try backup process *)
-  let try_process process backup ~src ~dst packet =
-    process ~src ~dst packet 
-    >>= fun result ->
-    match result with
-    | Some a ->
-        let open Query in
-        (match a.rcode with
-        | NXDomain | ServFail -> backup ~src ~dst packet
-        | _ -> return result)
-    | None -> backup ~src ~dst packet
-
   let start c k s =
     let server = DS.create s k in
     let resolver = DR.create s in
     DS.eventual_process_of_zonefiles server [zonefile]
     >>= fun process ->
-    let processor = (processor_of_process (try_process process (forwarder resolver)) :> (module Dns_server.PROCESSOR)) in 
+    let processor = (processor_of_process (compose process (forwarder resolver)) :> (module Dns_server.PROCESSOR)) in 
     DS.serve_with_processor server ~port ~processor
 end
