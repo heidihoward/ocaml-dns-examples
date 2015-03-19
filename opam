@@ -6,4 +6,7 @@ authors: "Heidi Howard <heidi.howard@cl.cam.ac.uk>"
 homepage: "https://github.com/heidi-ann/ocaml-dns-examples"
 bug-reports: "https://github.com/heidi-ann/ocaml-dns-examples/issues"
 license: ""
-depends: [ "mirage" {>= "2.3.0"} ]
+depends: [ 
+	"mirage" {>= "2.3.0"}
+	"dns" {>= "0.14.0"}
+	 ]
