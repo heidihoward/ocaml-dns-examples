@@ -1,0 +1,9 @@
+opam-version: "1.2"
+name: "dns-examples"
+version: "0.1"
+maintainer: "Heidi Howard <heidi.howard@cl.cam.ac.uk>"
+authors: "Heidi Howard <heidi.howard@cl.cam.ac.uk>"
+homepage: "https://github.com/heidi-ann/ocaml-dns-examples"
+bug-reports: "https://github.com/heidi-ann/ocaml-dns-examples/issues"
+license: ""
+depends: [ "mirage" {>= "2.3.0"} ]
