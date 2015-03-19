@@ -11,8 +11,8 @@ This is the demo code for a step-by-step guide to setting up your own DNS resolv
 [Part 2](http://hh360.user.srcf.net/blog/2015/03/part-2-running-your-own-dns-resolver-with-mirageos/)
 - 2.1: a simple DNS server, which responses to requests for zones in the zone file (code in [simple_server/](simple_server))
 
-[Part 3](http://hh360.user.srcf.net/blog/2015/03/part-3-running-your-own-dns-resolver-with-mirageos/) - 
-- 3.1: a simple DNS forwarding resolve, given a DNS query resolve recusively by asking another DNS server (code in [forwarder/](forwarder)
-- 3.2: combined DNS server, if zone is in zone file when use simple dns server (2.1), otherwise ask another DNS server (3.1) (code in [forwarder_server/](forwarder_server)
+[Part 3](http://hh360.user.srcf.net/blog/2015/03/part-3-running-your-own-dns-resolver-with-mirageos/)
+- 3.1: a simple DNS forwarding resolve, given a DNS query resolve recusively by asking another DNS server (code in [forwarder/](forwarder))
+- 3.2: combined DNS server, if zone is in zone file when use simple dns server (2.1), otherwise ask another DNS server (3.1) (code in [forwarder_server/](forwarder_server))
 
 Part 4 - work in progress
