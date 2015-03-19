@@ -13,22 +13,24 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
   module DS = Dns_server_mirage.Make(K)(S)
   module DR = Dns_resolver_mirage.Make(OS.Time)(S)
 
-  let process resolver c ~src ~dst packet =
+  let process resolver ~src ~dst packet =
       let open Packet in
-      C.log_s c (to_string packet) 
-      >>= fun () ->
       match packet.questions with
-      | [] -> return None (* we are not supporting QDCOUNT = 0  *)
+      | [] -> (* we are not supporting QDCOUNT = 0  *)
+          return None 
       | [q] -> 
-            DR.resolve (module Dns.Protocol.Client) resolver resolver_addr resolver_port q.q_class q.q_type q.q_name 
-            >>= fun result ->
-            (C.log_s c (to_string result) >>= fun () ->
-            return (Some (Dns.Query.answer_of_response result))) 
-      | _ -> return None (* we are not supporting QDCOUNT > 1 *)
+          DR.resolve (module Dns.Protocol.Client) resolver 
+            resolver_addr resolver_port q.q_class q.q_type q.q_name 
+          >>= fun result ->
+          return (Some (Dns.Query.answer_of_response result))) 
+      | _ -> (* we are not supporting QDCOUNT > 1 *)
+          return None
 
   let start c k s =
     let server = DS.create s k in
     let resolver = DR.create s in
-    let processor = ((Dns_server.processor_of_process (process resolver c)) :> (module Dns_server.PROCESSOR)) in 
+    let processor = 
+      ((Dns_server.processor_of_process (process resolver)) 
+          :> (module Dns_server.PROCESSOR)) in 
     DS.serve_with_processor server ~port ~processor
 end
