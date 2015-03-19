@@ -1,0 +1,5 @@
+branches:
+  only:
+    - master
+language: c
+script: bash -ex travis.sh
