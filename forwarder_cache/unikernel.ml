@@ -21,30 +21,13 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
     | [q] -> (* QDCOUNT=1 *)
         DR.resolve (module Dns.Protocol.Client) resolver resolver_addr resolver_port q.q_class q.q_type q.q_name 
         >>= fun result ->
-        Cache.add cache (time_now ()) q.q_name result.answers;
+        Cache.add cache (time_now ()) result;
         C.log_s c (Cache.to_string cache) >>= fun () ->
         return (Some (Dns.Query.answer_of_response result))
     | _ -> (* QDCOUNT != 1 *) return None
 
   let check_cache cache ~src ~dst packet =
-    let open Packet in
-    match packet.questions with
-    | [q] -> (* QDCOUNT=1 *)
-      begin
-        match Cache.lookup cache (time_now ()) q.q_name with
-        | [] -> return None
-        | r -> 
-        let open Query in
-        return (Some 
-        {
-        rcode=NoError;
-        aa= false;
-        answer= r;
-        authority= [];
-        additional= [];
-        })
-      end
-    | _ -> (* QDCOUNT != 1 *) return None
+    return (Cache.lookup cache (time_now ()) packet)
 
   let start c k s =
     let cache = Cache.create 5 in

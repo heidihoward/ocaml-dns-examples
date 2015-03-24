@@ -27,22 +27,42 @@ let map_filter ~f xs =
     | Some y -> y :: (apply xs) in
   apply xs
 
-let lookup t time name = 
-  let (init,rrs) = try Hashtbl.find t.data name with | Not_found -> (Int32.zero,[]) in
+let lookup t time query =
+  let open Packet in
+  match query.questions with
+    | [] -> (* QDCOUNT=0 *) None
+    | (qu::_) -> (* assume QDCOUNT=1, ignore extra questions *)
+  let (init,rrs) = try Hashtbl.find t.data qu.q_name with | Not_found -> (Int32.zero,[]) in
   let check_ttl rr =
     let diff = Int32.sub time init in
     let open Packet in
     if (diff <= rr.ttl) then Some {rr with ttl = Int32.sub rr.ttl diff}
     else None in
-  map_filter check_ttl rrs
+  match (map_filter check_ttl rrs) with
+    | [] -> None
+    | r -> let open Query in
+        Some 
+        {
+        rcode=NoError;
+        aa= false;
+        answer= r;
+        authority= [];
+        additional= [];
+        }
 
 let filter_rr rr =
   let open Packet in
   match rr.rdata with
-  | SOA _ -> false (* do not cache SOA records *)
-  | _ -> rr.ttl > min_ttl && rr.ttl < max_ttl
+    | SOA _ -> false (* do not cache SOA records *)
+    | _ -> rr.ttl > min_ttl && rr.ttl < max_ttl
 
-let rec add t time name rrs =
+let rec add t time packet =
+  let open Packet in
+  match packet.questions with
+    | [] -> (* QDCOUNT=0 *) ()
+    | (qu::_) -> (* assume QDCOUNT=1, ignore extra questions *)
+  let name = qu.q_name in
+  let rrs = packet.answers in 
   let rrs = List.filter filter_rr rrs in
   let if_no_space () = t.curr_size + List.length rrs > t.max_size in
   if if_no_space() then compress t time;
