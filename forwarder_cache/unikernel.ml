@@ -21,7 +21,7 @@ module Main (C:CONSOLE) (K:KV_RO) (S:STACKV4) = struct
     | [q] -> (* QDCOUNT=1 *)
         DR.resolve (module Dns.Protocol.Client) resolver resolver_addr resolver_port q.q_class q.q_type q.q_name 
         >>= fun result ->
-        Cache.add cache (time_now ()) result;
+        Cache.add_pkt cache (time_now ()) result;
         C.log_s c (Cache.to_string cache) >>= fun () ->
         return (Some (Dns.Query.answer_of_response result))
     | _ -> (* QDCOUNT != 1 *) return None
