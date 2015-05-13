@@ -1,6 +1,5 @@
 _build
 .*.swp
-.merlin
 *.xe
 *.xml
 backend.ml
